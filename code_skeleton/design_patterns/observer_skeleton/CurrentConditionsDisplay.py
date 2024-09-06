@@ -4,12 +4,18 @@ from Observable import Observable
 
 
 class CurrentConditionsDisplay(DisplayElement, Observer):
-    def __init__(self) -> None:
-        pass
+    def __init__(self, observable: Observable) -> None:
+        self._observable = observable
+        self._observable.register_observer(self)
+        self._temperature = 0.0
+        self._humidity = 0.0
         
     def update(self, observable: Observable) -> None:
-        pass
+        measurements = observable.get_measurements()
+        self._temperature = measurements.temperature
+        self._humidity = measurements.humidity
+        self.display
 
     def display(self) -> None:
-        pass
+        print(f'Current conditions: {self._temperature}F degrees and {self._humidity}% humidity')
 

@@ -1,0 +1,5 @@
+{
+    "python.analysis.extraPaths": [
+        "./code_skeleton/design_patterns/observer_skeleton"
+    ]
+}
