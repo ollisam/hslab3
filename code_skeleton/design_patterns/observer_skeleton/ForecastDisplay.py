@@ -1,19 +1,22 @@
 from DisplayElement import DisplayElement
+from IWeatherData import IWeatherData
 from Observer import Observer
 from Observable import Observable
 
 class ForecastDisplay(DisplayElement, Observer):
-    def __init__(self, observable: Observable) -> None:
+    def __init__(self, observable: Observable = None) -> None:
         self._observable = observable
-        self._observable.register_observer(self)
+        if self._observable:
+            self._observable.register_observer(self)
         self._last_pressure = None
         self._current_pressure = 0
 
     def update(self, observable: Observable) -> None:
-        measurements = observable.get_measurements()
-        self._last_pressure = self._current_pressure
-        self._current_pressure = measurements.pressure
-        self.display()
+        if isinstance(observable, IWeatherData):
+            measurements = observable.get_measurements()
+            self._last_pressure = self._current_pressure
+            self._current_pressure = measurements.pressure
+            self.display()
 
     def display(self):
         if self._current_pressure > self._last_pressure:
