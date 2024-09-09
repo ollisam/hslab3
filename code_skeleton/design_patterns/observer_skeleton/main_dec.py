@@ -3,19 +3,23 @@ from ForecastDisplay import ForecastDisplay
 from StatisticsDisplay import StatisticsDisplay
 from WeatherData import WeatherData
 from WeatherDataMeasurements import WeatherDataMeasurements
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from decorator_skeleton.ObservableWeatherData import ObservableWeatherData
 
 if __name__ == '__main__':
     weather_data = WeatherData()
-    observable_weather_data = ObservableWeatherData(WeatherData)
+    observable_weather_data = ObservableWeatherData(weather_data)
 
     current_conditions_display = CurrentConditionsDisplay()
     statistics_display = StatisticsDisplay()
     forecast_display = ForecastDisplay()
 
-    # observable_weather_data.register_observer(current_conditions_display)
-    # observable_weather_data.register_observer(statistics_display)
-    # observable_weather_data.register_observer(forecast_display)
+    observable_weather_data.register_observer(current_conditions_display)
+    observable_weather_data.register_observer(statistics_display)
+    observable_weather_data.register_observer(forecast_display)
 
     observable_weather_data.set_measurements(WeatherDataMeasurements(80, 65, 30.4))
     print('---')
