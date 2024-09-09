@@ -3,7 +3,7 @@ from ForecastDisplay import ForecastDisplay
 from StatisticsDisplay import StatisticsDisplay
 from WeatherData import WeatherData
 from WeatherDataMeasurements import WeatherDataMeasurements
-from decorator_skeleton.ObservableWeatherData import ObservableWeatherData
+
 
 if __name__ == '__main__':
     weather_data = WeatherData()
